@@ -1,0 +1,21 @@
+name: eviraAppSyncApi
+authentication:
+  type: API_KEY
+schema: schema.graphql
+apiKeys:
+  - name: '${self:service}-api'
+    description: '{sls:stage} API key.'
+logging:
+  level: ALL
+  retentionInDays: 14
+
+dataSources:
+  getProducts:
+    type: 'AWS_LAMBDA'
+    config:
+      functionArn: ${self:custom.getProductsLambdaArn}
+
+resolvers:
+  Query.getProducts:
+    kind: UNIT
+    dataSource: getProducts
