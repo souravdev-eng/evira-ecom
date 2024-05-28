@@ -1,17 +1,17 @@
 'use strict';
 
-module.exports.handler = async (event) => {
-  console.log(JSON.stringify(event));
+const { connectToDatabase } = require('../../db/dbConnect');
+const Product = require('../../models/productModel');
 
-  const returnValue = [
-    {
-      id: '123',
-      name: 'demo',
-    },
-    {
-      id: '345',
-      name: 'demo 1122',
-    },
-  ];
-  return [];
+module.exports.handler = async (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  try {
+    console.log(JSON.stringify(event));
+    await connectToDatabase();
+    const products = await Product.find({});
+    return products;
+  } catch (error) {
+    console.log('Error: while trying to fetch all product from db');
+    return error;
+  }
 };

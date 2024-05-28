@@ -4,10 +4,10 @@ type Query {
 }
 
 type Product {
-  id: ID!
+  _id: ID!
   name: String!
-  description: String
-  productImage: String
+  description: String!
+  productImage: String!
   imageList: [String]
   originalPrice: Float
   discountPrice: Float
@@ -15,15 +15,15 @@ type Product {
   updatedAt: AWSDateTime
 }
 
-# type Mutation {
-#   createProduct(newProduct: ProductInput): Product!
-# }
+type Mutation {
+  createProduct(input: ProductInput!): Product
+}
 
-# type ProductInput {
-#   name: String!
-#   description: String!
-#   productImage: String
-#   imageList: [String]
-#   originalPrice: Float!
-#   discountPrice: Float!
-# }
+input ProductInput {
+  name: String!
+  description: String!
+  productImage: String!
+  imageList: [String]
+  originalPrice: Float!
+  discountPrice: Float!
+}

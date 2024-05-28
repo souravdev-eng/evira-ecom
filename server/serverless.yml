@@ -5,6 +5,9 @@ provider:
   runtime: nodejs18.x
   stage: ${opt:stage, 'dev'}
   region: ap-south-1
+  environment:
+    MONGODB_URI: ${ssm:/${self:service}/${self:provider.stage}/MONGODB_URI}
+
   iam:
     role:
       statements:
@@ -34,12 +37,16 @@ provider:
 
 custom:
   getProductsLambdaArn: !Sub arn:aws:lambda:${self:provider.region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-getProducts
+  createProductLambdaArn: !Sub arn:aws:lambda:${self:provider.region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-createProduct
 
 appSync: ${file(./resources/appSync.yml)}
 
 functions:
   getProducts:
     handler: functions/products/getProducts.handler
+    description: ''
+  createProduct:
+    handler: functions/products/createProduct.handler
     description: ''
 
 plugins:

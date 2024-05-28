@@ -14,8 +14,15 @@ dataSources:
     type: 'AWS_LAMBDA'
     config:
       functionArn: ${self:custom.getProductsLambdaArn}
+  createProduct:
+    type: 'AWS_LAMBDA'
+    config:
+      functionArn: ${self:custom.createProductLambdaArn}
 
 resolvers:
   Query.getProducts:
     kind: UNIT
     dataSource: getProducts
+  Mutation.createProduct:
+    kind: UNIT
+    dataSource: createProduct
