@@ -4,6 +4,7 @@ import styles from './HomeScreen.styles';
 import Header from '../../organisms/Header/Header';
 import SearchBar from '../../organisms/SearchBar/SearchBar';
 import BannerList from '../../organisms/BannerList/BannerList';
+import CategoryList from '../../organisms/CategoryList/CategoryList';
 
 const HomeScreen = () => {
   return (
@@ -14,9 +15,12 @@ const HomeScreen = () => {
       <View style={{marginVertical: 20}}>
         <SearchBar />
       </View>
-      <BannerList />
       {/* Special offers */}
+      <BannerList />
       {/* Category icon list */}
+      <View style={{marginVertical: 20}}>
+        <CategoryList />
+      </View>
       {/* filter options */}
       {/* List of products */}
     </View>
