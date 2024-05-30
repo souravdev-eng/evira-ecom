@@ -19,7 +19,7 @@
     "serverless-step-functions": "^3.20.1"
   },
   "dependencies": {
-    "aws-sdk": "^2.1603.0",
+    "aws-sdk": "^2.1629.0",
     "mongoose": "^8.4.0"
   }
 }

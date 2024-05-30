@@ -11,7 +11,7 @@ module.exports.handler = async (event, context) => {
     const products = await Product.find({});
     return products;
   } catch (error) {
-    console.log('Error: while trying to fetch all product from db');
+    console.log('Error: while trying to fetch all product from db', error);
     return error;
   }
 };

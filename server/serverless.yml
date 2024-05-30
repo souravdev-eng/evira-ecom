@@ -7,6 +7,8 @@ provider:
   region: ap-south-1
   environment:
     MONGODB_URI: ${ssm:/${self:service}/${self:provider.stage}/MONGODB_URI}
+    PRODUCT_S3_BUCKET_NAME: ${self:custom.productS3BucketName}
+    REGION: ${self:provider.region}
 
   iam:
     role:
@@ -18,17 +20,25 @@ provider:
 
         - Effect: 'Allow'
           Action:
+            - s3:*
+          Resource: '*'
+
+        - Effect: 'Allow'
+          Action:
             - sns:*
           Resource:
             - '*'
+
         - Effect: 'Allow'
           Action:
             - logs:*
           Resource: '*'
+
         - Effect: 'Allow'
           Action:
             - ssm:*
           Resource: '*'
+
         - Effect: Allow
           Action:
             - execute-api:Invoke
@@ -38,6 +48,7 @@ provider:
 custom:
   getProductsLambdaArn: !Sub arn:aws:lambda:${self:provider.region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-getProducts
   createProductLambdaArn: !Sub arn:aws:lambda:${self:provider.region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-createProduct
+  productS3BucketName: evira-product-images-${opt:stage, self:provider.stage}
 
 appSync: ${file(./resources/appSync.yml)}
 
@@ -48,6 +59,21 @@ functions:
   createProduct:
     handler: functions/products/createProduct.handler
     description: ''
+
+resources:
+  Resources:
+    productS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.productS3BucketName}
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          IgnorePublicAcls: false
+          BlockPublicPolicy: false
+          RestrictPublicBuckets: false
+        OwnershipControls:
+          Rules:
+            - ObjectOwnership: BucketOwnerPreferred
 
 plugins:
   - serverless-appsync-plugin
