@@ -18,6 +18,14 @@ dataSources:
     type: 'AWS_LAMBDA'
     config:
       functionArn: ${self:custom.createProductLambdaArn}
+  updateProductById:
+    type: 'AWS_LAMBDA'
+    config:
+      functionArn: ${self:custom.updateProductByIdLambdaArn}
+  deleteProductById:
+    type: 'AWS_LAMBDA'
+    config:
+      functionArn: ${self:custom.deleteProductByIdLambdaArn}
 
 resolvers:
   Query.getProducts:
@@ -26,3 +34,9 @@ resolvers:
   Mutation.createProduct:
     kind: UNIT
     dataSource: createProduct
+  Mutation.updateProductById:
+    kind: UNIT
+    dataSource: updateProductById
+  Mutation.deleteProductById:
+    kind: UNIT
+    dataSource: deleteProductById

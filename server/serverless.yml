@@ -48,6 +48,8 @@ provider:
 custom:
   getProductsLambdaArn: !Sub arn:aws:lambda:${self:provider.region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-getProducts
   createProductLambdaArn: !Sub arn:aws:lambda:${self:provider.region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-createProduct
+  updateProductByIdLambdaArn: !Sub arn:aws:lambda:${self:provider.region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-updateProductById
+  deleteProductByIdLambdaArn: !Sub arn:aws:lambda:${self:provider.region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-deleteProductById
   productS3BucketName: evira-product-images-${opt:stage, self:provider.stage}
 
 appSync: ${file(./resources/appSync.yml)}
@@ -58,6 +60,12 @@ functions:
     description: ''
   createProduct:
     handler: functions/products/createProduct.handler
+    description: ''
+  updateProductById:
+    handler: functions/products/updateProductById.handler
+    description: ''
+  deleteProductById:
+    handler: functions/products/deleteProduct.handler
     description: ''
 
 resources:

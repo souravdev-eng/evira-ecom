@@ -16,7 +16,21 @@ type Product {
 }
 
 type Mutation {
-  createProduct(input: ProductInput!): Product
+  createProduct(input: ProductInput!): Product!
+  updateProductById(input: ProductUpdateInput!): String!
+  deleteProductById(id: ID!): String!
+}
+
+input ProductUpdateInput {
+  id: ID!
+  name: String
+  description: String
+  productImage: String
+  imageList: [String]
+  originalPrice: Float
+  discountPrice: Float
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
 
 input ProductInput {
