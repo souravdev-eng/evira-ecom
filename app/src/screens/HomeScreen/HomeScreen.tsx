@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-import {View, ScrollView, FlatList, Dimensions} from 'react-native';
+import {View, ScrollView, FlatList} from 'react-native';
 
 import styles from './HomeScreen.styles';
 import {CATEGORY_TAG} from '../../assets/data/categoryTag';
 
 import Header from '../../organisms/Header/Header';
+import ViewAll from '../../molecules/ViewAll/ViewAll';
 import SearchBar from '../../organisms/SearchBar/SearchBar';
 import BannerList from '../../organisms/BannerList/BannerList';
 import FilterCard from '../../molecules/FilterCard/FilterCard';
 import CategoryList from '../../organisms/CategoryList/CategoryList';
-import ViewAll from '../../molecules/ViewAll/ViewAll';
 import ProductCard from '../../molecules/ProductCard/ProductCard';
 
 const HomeScreen = () => {
