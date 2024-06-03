@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, ScrollView, FlatList} from 'react-native';
+import {View, ScrollView, FlatList, Dimensions} from 'react-native';
 
 import styles from './HomeScreen.styles';
 import {CATEGORY_TAG} from '../../assets/data/categoryTag';
@@ -10,6 +10,7 @@ import BannerList from '../../organisms/BannerList/BannerList';
 import FilterCard from '../../molecules/FilterCard/FilterCard';
 import CategoryList from '../../organisms/CategoryList/CategoryList';
 import ViewAll from '../../molecules/ViewAll/ViewAll';
+import ProductCard from '../../molecules/ProductCard/ProductCard';
 
 const HomeScreen = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -58,7 +59,11 @@ const HomeScreen = () => {
           )}
           keyExtractor={(_, idx) => idx.toString()}
         />
-        {/* List of products */}
+        <View style={styles.productContainer}>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, idx) => (
+            <ProductCard key={idx} />
+          ))}
+        </View>
       </View>
     </ScrollView>
   );
